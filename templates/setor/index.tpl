@@ -1,12 +1,11 @@
 {% extends "base.tpl" %}
 {% block content_area %}
 
-
     {% wire id="add_setor_" action={redirect dispatch="add_setor"} %}
-    <button id="add_setor_" class="btn btn-primary">Adicionar Setor</button>
+    <button id="add_setor_" class="col-sm-3 btn btn-primary">Adicionar Setor</button>
     <br>
     <br>
-    <h1 class="text-center btn-success"  >Setor</h1>
+    <h1 class="text-center"  >Setor - Abensoft</h1>
     <br>
     <table class="table">
         <thead>

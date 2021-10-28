@@ -1,7 +1,7 @@
 /* Styling for default blog template.
    ----------------------------------------------------------
 
-@package:	Atatonic CSS framework 2009	
+@package:	Atatonic CSS framework 2009
 @Author: 	Tim Benniks <tim@timbenniks.nl>
 @Created: 	10-12-2009
 @Changed:	19-03-2010
@@ -59,14 +59,14 @@ div.navbar .nav li a {
    ---------------------------------------------------------- */
 
 h1 {
-    color: #163a51;
-    font-size: 18px;
-    margin: 0 0 12px 0;
+    color: navy;
+    font-size: 50px;
+    margin: 0 0 50px 0;
     font-style: normal;
 }
 
 .big h1 {
-    font-size: 32px;
+    font-size: 50px;
 }
 
 header h1 {
@@ -272,7 +272,7 @@ header {
 
 
 /* Posts
-   ---------------------------------------------------------- */	
+   ---------------------------------------------------------- */
 
 .post {
     margin: 0 0 36px 0;
@@ -294,7 +294,7 @@ header {
     font-size: 12px;
     font-style: italic;
     margin: 0;
-    color: #666;	
+    color: #666;
 }
 
 .post img {
