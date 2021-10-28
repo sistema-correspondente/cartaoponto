@@ -9,6 +9,9 @@
 
  {archives_y,   ["archives", year],         controller_template,  [ {template, "archives.tpl"}, {cat, article} ]},
  {archives_m,   ["archives", year, month],  controller_template,  [ {template, "archives.tpl"}, {cat, article} ]},
+ {horarios,     ["horarios"],               controller_template,  [{ template, "horarios/index.tpl"} ] },
+ {horarios_add, ["horarios", "add"] ,       controller_template,  [{ template, "horarios/add.tpl" }]},
+ {archives_m,   ["archives", year, month],  controller_template,  [ {template, "archives.tpl"}, {cat, article} ]},
  {setor, ["setor"], controller_template, [{template, "setor/index.tpl"}]},
  {add_setor, ["setor", "add"], controller_template, [{template, "setor/add.tpl"}]},
  {edit_setor, ["setor", "edit", id], controller_template, [{template, "setor/edit.tpl"}]}
