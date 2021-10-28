@@ -8,6 +8,8 @@
  {page_contact, ["contact"],                controller_page,      [ {template, "contact.tpl"}, {id, page_contact} ]},
 
  {archives_y,   ["archives", year],         controller_template,  [ {template, "archives.tpl"}, {cat, article} ]},
- {archives_m,   ["archives", year, month],  controller_template,  [ {template, "archives.tpl"}, {cat, article} ]}
-
+ {archives_m,   ["archives", year, month],  controller_template,  [ {template, "archives.tpl"}, {cat, article} ]},
+ {setor, ["setor"], controller_template, [{template, "setor/index.tpl"}]},
+ {add_setor, ["setor", "add"], controller_template, [{template, "setor/add.tpl"}]},
+ {edit_setor, ["setor", "edit", id], controller_template, [{template, "setor/edit.tpl"}]}
 ].
