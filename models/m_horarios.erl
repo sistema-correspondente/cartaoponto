@@ -15,7 +15,8 @@
     m_find_value/3,
     m_to_list/2,
     m_value/2,
-    insert/7
+    insert/7,
+    delete/2
 ]).
 
 
@@ -49,4 +50,9 @@ insert(Descricao,Semana,Horaini,Horafim,Tolerancia,Setor_id, Context) ->
         {setor_id,Setor_id}
     ],
     z_db:insert("horarios", Props, Context).
+
+delete(Id,Context)->
+    ?DEBUG(Id),
+    z_db:delete("horarios", Id, Context).
+
 

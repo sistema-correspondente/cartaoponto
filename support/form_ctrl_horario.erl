@@ -30,6 +30,12 @@ event(#submit{message = {add_horarios,Args}},Context)->
         Context);
 
 
+event(#postback{message = {del_horarios, Args}}, Context) ->
+    Id = proplists:get_value(id, Args),
+    m_horarios:delete(Id, Context),
+    z_render:wire({reload, []}, Context);
+
+
 
 event(X,Context)->
     io:format('chegou',[]),

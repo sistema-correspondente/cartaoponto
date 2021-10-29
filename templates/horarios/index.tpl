@@ -5,7 +5,7 @@
     <br>
     <div class="container">
     {%  wire id="add" action={redirect dispatch="horarios_add"} %}
-    <button id="add" class="btn btn-primary">Adicioar</button>
+    <button id="add" class="btn btn-primary">Adicionar</button>
         <br>
         <br>
     <table class="table">
@@ -36,6 +36,12 @@
                 ></td>
 
             <td>{{ hor.tolerancia }}</td>
+            <td>
+                {% wire id="del_horario_"|append:hor.id postback={del_horarios id=hor.id} delegate="form_ctrl_horario"%}
+                <button id="del_horario_{{hor.id}}" class="btn btn-danger">Excluir H</button>
+            </td>
+
+
         </tr>
         {% endfor %}
         </tbody>
