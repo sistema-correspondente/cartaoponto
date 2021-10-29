@@ -22,7 +22,6 @@
     get/2,
     delete/2,
     select/1,
-    select_setor_desc/2,
     select_setor/1,
     insert/5
 ]).
@@ -50,12 +49,13 @@ m_value(_, _Context) ->
     undefined.
 
 select( Context) ->
-    Sql = "select * from funcionario",
+    Sql = "select
+                *
+           from funcionario
+           left join setor  on
+                funcionario.setor_id = setor.id
+           order by funcionario.nome",
     z_db:assoc(Sql, Context).
-
-select_setor_desc(Setor_id, Context) ->
-    Sql = "select * from funcionario join setor on  funcionario.setor_id =$1",
-    z_db:assoc(Sql, [Setor_id], Context).
 
 
 select_setor( Context) ->

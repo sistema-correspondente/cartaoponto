@@ -22,7 +22,6 @@
         <br>
 
         <label for="setor_id">Setor (select one):</label>
-        {%  print m.funcionario[{select_setor}]%}
         <select class="form-control" id="setor_id" name="setor_id">
 
             {% for setor in m.funcionario[{select_setor}]%}
