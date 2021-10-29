@@ -52,8 +52,8 @@ cria_tabela_horarios(Context)->
                 #column_def{name=id,type="serial",is_nullable=false},
                 #column_def{name=descricao,type="varchar",length=50,is_nullable=false},
                 #column_def{name=dia_semana,type="varchar",length=50,is_nullable=false},
-                #column_def{name=hora_inicial,type="timestamptz",is_nullable=false},
-                #column_def{name=hora_final,type="timestamptz",is_nullable=false},
+                #column_def{name=hora_inicial,type="time",is_nullable=false},
+                #column_def{name=hora_final,type="time",is_nullable=false},
                 #column_def{name=tolerancia,type="varchar",length=50,is_nullable=false},
                 #column_def{name=setor_id,type="integer",is_nullable=true}
             ],Context),

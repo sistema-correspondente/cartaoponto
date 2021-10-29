@@ -11,9 +11,9 @@
         <thead>
             <tr>
 
-                <th scope="col">Setor</th>
-                <th scope="col">Editar</th>
-                <th scope="col">Excluir</th>
+                <th scope="col">SETOR:</th>
+                <th scope="col">EDITAR:</th>
+                <th scope="col">EXCLUIR:</th>
             </tr>
         </thead>
 
