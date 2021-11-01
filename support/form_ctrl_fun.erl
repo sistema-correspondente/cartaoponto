@@ -34,9 +34,8 @@ event(#submit{message ={add_funcionario, Args}}, Context) ->
 
 event(#submit{message = {edit_funcionario, Args}}, Context) ->
     Args1 = lists:merge(Args, z_context:get_q_all(Context)),
-
+    ?DEBUG(Args1),
     Id = z_utils:depickle(proplists:get_value("id", Args1), Context),
-
     Cpf = proplists:get_value("cpf", Args1),
     Nome = proplists:get_value("nome", Args1),
     Ativo = proplists:get_value("ativo", Args1),
@@ -45,7 +44,7 @@ event(#submit{message = {edit_funcionario, Args}}, Context) ->
         true ->  1;
         _ -> 0
     end,
-    Setor = list_to_integer(proplists:get_value("setor", Args1)),
+    Setor = form_utils:to_integer(proplists:get_value("setor_id", Args1)),
     RscId = z_utils:depickle(proplists:get_value("rsc_id", Args1), Context),
     m_rsc:update(RscId, [{title, Nome}], Context),
     m_funcionario:update(Id, Cpf, Nome, Ativo1, Setor,  Context),
