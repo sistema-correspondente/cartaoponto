@@ -1,4 +1,4 @@
- {% extends "page.tpl" %}
+{% extends "page.tpl" %}
 
 {% block content_area %}
     <h1>Editando funcionario </h1>

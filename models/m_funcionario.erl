@@ -23,7 +23,7 @@
     delete/2,
     select/1,
     select_setor/1,
-    insert/5
+    insert/6
 ]).
 
 
@@ -64,13 +64,13 @@ select_setor( Context) ->
 
 
 
-insert(Cpf, Nome, Ativo, Setor_id, Context) ->
+insert(Cpf, Nome, Ativo, Setor_id, RscId, Context) ->
     Props = [
         {cpf, Cpf},
         {nome, Nome},
         {ativo, Ativo},
-        {setor_id, Setor_id}
-
+        {setor_id, Setor_id},
+        {rsc_id, RscId}
     ],
     ?DEBUG(Props),
     z_db:insert("funcionario", Props, Context).
@@ -93,4 +93,12 @@ update(Id, Cpf, Nome, Ativo, Setor_id, Context) ->
     z_db:update("funcionario", Id, Props, Context).
 
 delete(Id, Context) ->
-    z_db:delete("funcionario", Id, Context).
+    F = fun(Ctx) ->
+            Funcionario = get(Id, Ctx),
+            ?DEBUG(Funcionario),
+            RscId = proplists:get_value(rsc_id, Funcionario),
+            ?DEBUG(RscId),
+            z_db:delete("funcionario", Id, Ctx),
+            m_rsc:delete(RscId, Ctx)
+        end,
+    z_db:transaction(F, Context).

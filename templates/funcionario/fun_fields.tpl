@@ -1,7 +1,7 @@
 {%  with m.funcionario [{get id=id}] as funcionario  %}
 
 <input type="hidden" id="id" name="id" value="{{ id|pickle }}"/>
-
+    <input type="hidden" id="rsc_id" name="rsc_id" value="{{ funcionario.rsc_id|pickle }}"/>
 <label for="cpf">CPF:</label>
 <input type="text" id="cpf" name="cpf" class="form-control" value="{{ funcionario.cpf }}" placeholder="000.000.000-00"/>
 {% validate id="cpf" type={presence message_failure="Campo Obrigatório."} message_after="cpf" %}
@@ -29,7 +29,6 @@
             <option  value={{ setor.id }}>{{ setor.descricao }}</option>
             {% endfor %}
         </select>
-
 
 
 
