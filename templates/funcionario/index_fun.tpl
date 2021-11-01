@@ -12,17 +12,20 @@
         <th>Nome      </th>
         <th>ativo     </th>
         <th>Setor     </th>
-        <th>...       </th>
+        <th>          </th>
     </tr>
     </thead>
 
  <tbody>
-    {%  for funcionario in m.funcionario[{select}] %}
+ {% with m.funcionario[{select}] as funcionarios %}
+
+    {%  for funcionario in funcionarios %}
         <tr>
-            <td> {{ funcionario.cpf }} </td>
-            <td> {{ funcionario.nome }}</td>
-            <td> {{ funcionario.ativo }}</td>
-            <td> {{ funcionario.setor_id }}</td>
+
+            <td> {{ funcionario.cpf }}   </td>
+            <td> {{ funcionario.nome }}  </td>
+            <td> {{ funcionario.ativo }} </td>
+            <td> {{ funcionario.descricao }}   </td>
             <td>
                 {% wire id="edit_funcionario_"|append:funcionario.id action={redirect dispatch="edit_funcionario" id=funcionario.id} %}
                  <button id="edit_funcionario_{{ funcionario.id }}" class="btn btn-sm btn-warning">Editar</button>
@@ -32,6 +35,7 @@
             </td>
         </tr>
     {% endfor %}
+ {% endwith %}
  </tbody>
     </table>
     </div>
