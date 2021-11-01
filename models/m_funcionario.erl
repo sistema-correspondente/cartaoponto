@@ -95,8 +95,10 @@ update(Id, Cpf, Nome, Ativo, Setor_id, Context) ->
 delete(Id, Context) ->
     F = fun(Ctx) ->
             Funcionario = get(Id, Ctx),
+            ?DEBUG(Funcionario),
             RscId = proplists:get_value(rsc_id, Funcionario),
-            m_rsc:delete(RscId, Ctx),
-            z_db:delete("funcionario", Id, Ctx)
+            ?DEBUG(RscId),
+            z_db:delete("funcionario", Id, Ctx),
+            m_rsc:delete(RscId, Ctx)
         end,
     z_db:transaction(F, Context).

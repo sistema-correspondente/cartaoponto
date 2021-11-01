@@ -24,7 +24,13 @@
 
             <td> {{ funcionario.cpf }}   </td>
             <td> {{ funcionario.nome }}  </td>
-            <td> {{ funcionario.ativo }} </td>
+            <td>
+                {% if  funcionario.ativo   %}
+                Sim
+                {% else %}
+                Não
+                {% endif %}
+                 </td>
             <td> {{ funcionario.descricao }}   </td>
             <td>
                 {% wire id="edit_funcionario_"|append:funcionario.id action={redirect dispatch="edit_funcionario" id=funcionario.id} %}
