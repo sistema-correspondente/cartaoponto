@@ -4,7 +4,7 @@
 
         {% wire id="new_horario" type="submit" postback={edit_horarios} delegate="form_ctrl_horario" %}
             <form id="new_horario" metheod="post" action="postback">
-                {% include "horarios/_fields.tpl" id=id %}
+                {% include "horarios/_fields.tpl" id=id |to_integer %}
     <br>
                     <button type="submit" class="btn btn-success" >Salvar</button>
             </form>

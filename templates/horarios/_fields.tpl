@@ -1,9 +1,10 @@
 {% with m.horarios [{get id=id}] as hor %}
-{% print id %}
-    {%  print hor %}
 
+    
+    <input type="hidden" id="id" name="id" value="{{ id }}"/>
+    <input type="hidden" id="setor_id" name="setor_id" value="{{ 1 }}"/>
     <label>Descrição</label>
-    <input type="text" class="form-control" id="descricao" name="descricao" value={{ hor.descricao }}/>
+    <input type="text" class="form-control" id="descricao" name="descricao" value="{{ hor.descricao }}"/>
     <br>
 
     <label>Dias de semana trabalhados</label>
@@ -20,9 +21,6 @@
 
     <label>Tolerância</label>
     <input type="number" class="form-control" id="tolerancia" name="tolerancia" value="{{ hor.tolerancia }}"/>
-
-    <input type="hidden" id="setor_id" name="setor_id" value={{ 1|to_integer   }}/>
-    <input type="hidden" id="id" name="id" value="{{ id|to_integer }}"/>
 
 
 

@@ -22,7 +22,7 @@ event(#submit{message = {add_horarios,Args}},Context)->
     Horaini = proplists:get_value("horaini", Args1),
     Horafim = proplists:get_value("horafim", Args1),
     Tolerancia = proplists:get_value("tolerancia", Args1),
-    Setor_id = z_utils:depickle(proplists:get_value("setor_id", Args1),Context),
+    Setor_id = list_to_integer(proplists:get_value("setor_id", Args1)),
     HoraInicialFormatada = form_utils:tranform_hour_to_tuple(Horaini),
     HoraFinalFormatada = form_utils:tranform_hour_to_tuple(Horafim),
 
@@ -30,26 +30,16 @@ event(#submit{message = {add_horarios,Args}},Context)->
     z_render:wire({redirect, [{dispatch, "horarios"}]},
         Context);
 
-
-event(#postback{message = {del_horarios, Args}}, Context) ->
-    Id = proplists:get_value(id, Args),
-    m_horarios:delete(Id, Context),
-    z_render:wire({reload, []}, Context);
-
-
-
-
-
 event(#submit{message = {edit_horarios, Args}}, Context)->
     Args1 = lists:merge(Args,z_context:get_q_all(Context)),
     ?DEBUG(Args1),
-    Id = proplists:get_value("id", Args1),
+    Id = list_to_integer(proplists:get_value("id", Args1)),
     Descricao = proplists:get_value("descricao", Args1),
     Semana = proplists:get_value("semana", Args1),
     Horaini = proplists:get_value("horaini", Args1),
     Horafim = proplists:get_value("horafim", Args1),
     Tolerancia = proplists:get_value("tolerancia", Args1),
-    Setor_id = proplists:get_value("setor_id", Args1),
+    Setor_id = list_to_integer(proplists:get_value("setor_id", Args1)),
     HoraInicialFormatada = form_utils:tranform_hour_to_tuple(Horaini),
     HoraFinalFormatada = form_utils:tranform_hour_to_tuple(Horafim),
     ?DEBUG(Id),
@@ -60,6 +50,10 @@ event(#submit{message = {edit_horarios, Args}}, Context)->
         Context);
 
 
+event(#postback{message = {del_horarios, Args}}, Context) ->
+    Id = proplists:get_value(id, Args),
+    m_horarios:delete(Id, Context),
+    z_render:wire({reload, []}, Context);
 
 
 event(X,Context)->

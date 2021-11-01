@@ -63,7 +63,7 @@ get(Id, Context) ->
         {H2,M2,S2} = proplists:get_value('hora_final',Value),
         Rows1 = form_utils:delete_multiple_keys(['hora_inicial','hora_final'],Value),
         [{hora_inicial_srt, z_dateformat:format({{0,0,0}, {H,M,S}},    "H:i", en)},
-            {hora_final_srt,   z_dateformat:format({{0,0,0}, {H2,M2,S2}}, "H:i", en)} | Rows1].
+         {hora_final_srt,   z_dateformat:format({{0,0,0}, {H2,M2,S2}}, "H:i", en)} | Rows1].
 
 
 
