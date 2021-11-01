@@ -10,7 +10,9 @@
 -author("mauricio").
 
 %% API
--export([tranform_hour_to_tuple/1,delete_multiple_keys/2]).
+-export([tranform_hour_to_tuple/1,
+        delete_multiple_keys/2,
+        to_integer/1]).
 
 tranform_hour_to_tuple(Time)->
     Res = string:split(Time,":"),
@@ -24,5 +26,15 @@ delete_multiple_keys([Key|Keys],Arr)->
     Arr1 = proplists:delete(Key, Arr),
     delete_multiple_keys(Keys,Arr1).
 
+
+to_integer(undefined) -> undefined;
+to_integer(Valor) when is_binary(Valor)->
+    binary_to_integer(Valor);
+to_integer(Valor) when is_float(Valor)->
+    float_to_list(Valor);
+to_integer(Valor) when is_list(Valor) ->
+    list_to_integer(Valor);
+to_integer(Valor) ->
+    Valor.
 
 

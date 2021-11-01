@@ -89,8 +89,13 @@ update(Id, Cpf, Nome, Ativo, Setor_id, Context) ->
         {ativo, Ativo},
         {setor_id, Setor_id}
 
+
     ],
-    z_db:update("funcionario", Id, Props, Context).
+    F = fun(Ctx) ->
+        z_db:update("funcionario", Id, Props, Ctx)
+        end,
+    z_db:transaction(F, Context).
+
 
 delete(Id, Context) ->
     F = fun(Ctx) ->
