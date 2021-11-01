@@ -55,17 +55,17 @@ select(Context)->
 
 get(Id, Context) ->
     Sql = "select * from horarios where id = $1",
-    Value = case z_db:assoc(Sql, [Id], Context) of
-        [R] -> R;
+    case z_db:assoc(Sql, [Id], Context) of
+        [R] -> corrige_valores(R, Context);
         _ -> []
-    end,
-        {H,M,S} = proplists:get_value('hora_inicial',Value),
-        {H2,M2,S2} = proplists:get_value('hora_final',Value),
+    end.
+
+corrige_valores(Value, Context) ->
+        HoraInicial = proplists:get_value(hora_inicial,Value),
+        HoraFinal = proplists:get_value(hora_final,Value),
         Rows1 = form_utils:delete_multiple_keys(['hora_inicial','hora_final'],Value),
-        [{hora_inicial_srt, z_dateformat:format({{0,0,0}, {H,M,S}},    "H:i", en)},
-         {hora_final_srt,   z_dateformat:format({{0,0,0}, {H2,M2,S2}}, "H:i", en)} | Rows1].
-
-
+        [{hora_inicial_srt, z_dateformat:format({{0,0,0}, HoraInicial},    "H:i", en)},
+         {hora_final_srt,   z_dateformat:format({{0,0,0}, HoraFinal}, "H:i", en)} | Rows1].
 
 
 insert(Descricao,Semana,Horaini,Horafim,Tolerancia,Setor_id, Context) ->

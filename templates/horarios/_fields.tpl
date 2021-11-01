@@ -1,6 +1,6 @@
 {% with m.horarios [{get id=id}] as hor %}
 
-    
+    {% print hor %}
     <input type="hidden" id="id" name="id" value="{{ id }}"/>
     <input type="hidden" id="setor_id" name="setor_id" value="{{ 1 }}"/>
     <label>Descrição</label>
