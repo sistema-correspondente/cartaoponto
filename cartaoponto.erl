@@ -49,7 +49,7 @@ cria_tabela_horarios(Context)->
     case z_db:table_exists(horarios,Context) of
         false ->
             z_db:create_table(horarios, [
-                #column_def{name=id,type="serial",is_nullable=false},
+                #column_def{name=id,type="serial ",is_nullable=false},
                 #column_def{name=descricao,type="varchar",length=50,is_nullable=false},
                 #column_def{name=dia_semana,type="varchar",length=50,is_nullable=false},
                 #column_def{name=hora_inicial,type="time",is_nullable=false},
@@ -76,7 +76,8 @@ cria_tabela_funcionario(Context)->
             z_db:q("ALTER TABLE funcionario ADD CONSTRAINT FK_SetorId_F FOREIGN KEY (setor_id) REFERENCES setor(id)", Context);
         true ->
             ok
-    end.
+    end,
+    z_db:q("ALTER TABLE funcionario ADD COLUMN  IF NOT EXISTS  rsc_id INTEGER REFERENCES rsc(Id)").
 
 
 cria_tabela_movimentacao(Context)->

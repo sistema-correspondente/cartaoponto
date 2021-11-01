@@ -26,7 +26,9 @@ event(#submit{message ={add_funcionario, Args}}, Context) ->
           _ -> 0
     end,
     Setor = list_to_integer(proplists:get_value("setor_id", Args1)),
-    m_funcionario:insert(Cpf, Nome, Ativo1, Setor, Context),
+    {ok, CatId} = m_category:name_to_id(person, Context),
+    {ok, RscId} = m_rsc:insert([{title, Nome}, {category_id, CatId }], Context),
+    m_funcionario:insert(Cpf, Nome, Ativo1, Setor, RscId, Context),
     z_render:wire({redirect, [{dispatch,"funcionario" }]}, Context );
 
 
@@ -44,7 +46,9 @@ event(#submit{message = {edit_funcionario, Args}}, Context) ->
         _ -> 0
     end,
     Setor = list_to_integer(proplists:get_value("setor", Args1)),
-    m_funcionario:update(Id, Cpf, Nome, Ativo1, Setor, Context),
+    RscId = z_utils:depickle(proplists:get_value("rsc_id", Args1), Context),
+    m_rsc:update(RscId, [{title, Nome}], Context),
+    m_funcionario:update(Id, Cpf, Nome, Ativo1, Setor,  Context),
 %%    z_notifier:notify({   }),
     z_render:wire({redirect, [{dispatch, "funcionario"}]}, Context);
 
