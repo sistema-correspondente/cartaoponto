@@ -22,7 +22,6 @@
         </thead>
         <tbody>
         {% for hor in  m.horarios[{select}] %}
-            {% print hor %}
         <tr>
             <td>{{ hor.descricao }}</td>
             <td>{{ hor.dia_semana }}</td>
@@ -31,14 +30,14 @@
                        class="form-control" disabled
             ></td>
             <td>
-                <input type="time" value={{hor.hora_final}}
+                <input type="time" value={{hor.hora_final_srt}}
                        class="form-control" disabled
                 ></td>
 
             <td>{{ hor.tolerancia }}</td>
             <td>
                 {% wire id="horarios_edit_"|append:hor.id action={redirect dispatch="horarios_edit" id=hor.id} %}
-                <button id="horarios_edit_{{ hor.id }}" class="btn btn-warning"> Editar H {{ hor.id }}</button>
+                <button id="horarios_edit_{{ hor.id }}" class="btn btn-warning"> Editar</button>
             </td>
             <td>
                 {% wire id="del_horario_"|append:hor.id postback={del_horarios id=hor.id} delegate="form_ctrl_horario"%}

@@ -22,10 +22,9 @@ event(#submit{message = {add_horarios,Args}},Context)->
     Horaini = proplists:get_value("horaini", Args1),
     Horafim = proplists:get_value("horafim", Args1),
     Tolerancia = proplists:get_value("tolerancia", Args1),
-    Setor_id = list_to_integer(proplists:get_value("setor_id", Args1)),
-    HoraInicialFormatada = _utils:tranformaHoraParaTupla(Horaini),
-    HoraFinalFormatada = _utils:tranformaHoraParaTupla(Horafim),
-
+    Setor_id = z_utils:depickle(proplists:get_value("setor_id", Args1),Context),
+    HoraInicialFormatada = form_utils:tranform_hour_to_tuple(Horaini),
+    HoraFinalFormatada = form_utils:tranform_hour_to_tuple(Horafim),
 
     m_horarios:insert(Descricao,Semana,HoraInicialFormatada,HoraFinalFormatada,Tolerancia,Setor_id,Context),
     z_render:wire({redirect, [{dispatch, "horarios"}]},
@@ -43,25 +42,22 @@ event(#postback{message = {del_horarios, Args}}, Context) ->
 
 event(#submit{message = {edit_horarios, Args}}, Context)->
     Args1 = lists:merge(Args,z_context:get_q_all(Context)),
-
-    Id = z_utils:depickle(proplists:get_value("id_hr", Args1), Context),
+    ?DEBUG(Args1),
+    Id = proplists:get_value("id", Args1),
     Descricao = proplists:get_value("descricao", Args1),
-    Semana = list_to_integer(proplists:get_value("semana", Args1)),
+    Semana = proplists:get_value("semana", Args1),
     Horaini = proplists:get_value("horaini", Args1),
     Horafim = proplists:get_value("horafim", Args1),
-    Tolerancia = list_to_integer(proplists:get_value("tolerancia", Args1)),
+    Tolerancia = proplists:get_value("tolerancia", Args1),
     Setor_id = proplists:get_value("setor_id", Args1),
-    HoraInicialFormatada = _utils:tranformaHoraParaTupla(Horaini),
-    HoraFinalFormatada = _utils:tranformaHoraParaTupla(Horafim),
+    HoraInicialFormatada = form_utils:tranform_hour_to_tuple(Horaini),
+    HoraFinalFormatada = form_utils:tranform_hour_to_tuple(Horafim),
+    ?DEBUG(Id),
+    ?DEBUG(Setor_id),
 
     m_horarios:update(Id, Descricao,Semana,HoraInicialFormatada,HoraFinalFormatada,Tolerancia,Setor_id,Context),
     z_render:wire({redirect, [{dispatch, "horarios"}]},
         Context);
-
-
-
-
-
 
 
 
