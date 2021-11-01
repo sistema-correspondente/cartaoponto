@@ -35,8 +35,25 @@ m_value(_, _Context) ->
 
 select(Context)->
     Sql = "select * from horarios",
-    Value = z_db:assoc(Sql,Context),
-    ?DEBUG(Value).
+    Rows = z_db:assoc(Sql,Context),
+        F = fun(Row,{0,Sum,KeyFront,Campo}) ->
+        {H,M,S} = proplists:get_value(Campo,Row),
+                ?DEBUG(M),
+%%            ?DEBUG({hora_inicial_srt, z_dateformat:format({{0,0,0}, {H,M,S}}, "H:i", en)}),
+
+%%            Row1 = proplists:delete(hora_final, Row),
+
+           A = [{KeyFront, z_dateformat:format({{0,0,0}, {H,M,S}}, "H:i", en)}, {}, {} | proplists:delete(Campo, Row)],
+            A
+
+        end,
+       Result = lists:mapfoldl(F,{0,"hora_inicial_srt","hora_inicial"}, Rows),
+        ?DEBUG(Result).
+%%       lists:mapfoldl(F,{0,hora_final_srt,hora_final}, Result).
+
+%%    ?DEBUG(Result).
+%%     Rows.
+
 
 
 insert(Descricao,Semana,Horaini,Horafim,Tolerancia,Setor_id, Context) ->

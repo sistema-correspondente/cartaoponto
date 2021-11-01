@@ -78,6 +78,7 @@ cria_tabela_funcionario(Context)->
             ok
     end.
 
+
 cria_tabela_movimentacao(Context)->
     case z_db:table_exists(movimentacao,Context) of
         false ->

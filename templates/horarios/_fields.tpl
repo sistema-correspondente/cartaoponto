@@ -18,7 +18,7 @@
 
     <label>Tolerância</label>
     <input type="number" class="form-control" id="tolerancia" name="tolerancia"/>
-    <input type="hidden" id="setor_id" name="setor_id" value="{{ 1 }}"/>
+    <input type="hidden" id="setor_id" name="setor_id" value="1"/>
 
 
 

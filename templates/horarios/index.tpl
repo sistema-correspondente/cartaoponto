@@ -27,18 +27,18 @@
             <td>{{ hor.descricao }}</td>
             <td>{{ hor.dia_semana }}</td>
             <td>
-                <input type="time" value={{hor.hora_inicial[1]}}:{{hor.hora_inicial[2] }}
+                <input type="time" value={{hor.hora_inicial_srt}}
                        class="form-control" disabled
             ></td>
             <td>
-                <input type="time" value={{hor.hora_final[1]}}:{{hor.hora_final[2] }}
+                <input type="time" value={{hor.hora_final}}
                        class="form-control" disabled
                 ></td>
 
             <td>{{ hor.tolerancia }}</td>
             <td>
                 {% wire id="del_horario_"|append:hor.id postback={del_horarios id=hor.id} delegate="form_ctrl_horario"%}
-                <button id="del_horario_{{hor.id}}" class="btn btn-danger">Excluir H</button>
+                <button id="del_horario_{{hor.id}}" class="btn btn-danger">Excluir </button>
             </td>
 
 

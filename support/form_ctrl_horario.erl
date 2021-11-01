@@ -14,18 +14,20 @@
 -export([event/2]).
 
 event(#submit{message = {add_horarios,Args}},Context)->
-%%    ?DEBUG(Args),
-%%    ?DEBUG(z_context:get_q_all(Context)),
+    ?DEBUG(Args),
+    ?DEBUG(z_context:get_q_all(Context)),
     Args1 = lists:merge(Args,z_context:get_q_all(Context)),
     Descricao = proplists:get_value("descricao", Args1),
-    Semana = list_to_integer(proplists:get_value("semana", Args1)),
-    Horaini = "13:15:00",
-%%        proplists:get_value("horaini", Args1),
-    Horafim = "12:00:00",
-%%        proplists:get_value("horafim", Args1),
-    Tolerancia = list_to_integer(proplists:get_value("tolerancia", Args1)),
-    Setor_id = proplists:get_value("setor_id", Args1),
-    horarios:insert(Descricao,Semana,Horaini,Horafim,Tolerancia,Setor_id,Context),
+    Semana = proplists:get_value("semana", Args1),
+    Horaini = proplists:get_value("horaini", Args1),
+    Horafim = proplists:get_value("horafim", Args1),
+    Tolerancia = proplists:get_value("tolerancia", Args1),
+    Setor_id = list_to_integer(proplists:get_value("setor_id", Args1)),
+    HoraInicialFormatada = tranformaHoraParaTupla(Horaini),
+    HoraFinalFormatada = _utils:tranformaHoraParaTupla(Horafim),
+
+
+    m_horarios:insert(Descricao,Semana,HoraInicialFormatada,HoraFinalFormatada,Tolerancia,Setor_id,Context),
     z_render:wire({redirect, [{dispatch, "horarios"}]},
         Context);
 
