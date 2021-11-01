@@ -6,19 +6,20 @@
  {keyword,      ["by_keyword", id, slug],   controller_page,      [ {template, "by_keyword.tpl"} ]},
 
  {page_contact, ["contact"],                controller_page,      [ {template, "contact.tpl"}, {id, page_contact} ]},
- {archives_m,   ["archives", year, month],  controller_template,  [ {template, "archives.tpl"}, {cat, article} ]},
+
  {archives_y,   ["archives", year],         controller_template,  [ {template, "archives.tpl"}, {cat, article} ]},
  {archives_m,   ["archives", year, month],  controller_template,  [ {template, "archives.tpl"}, {cat, article} ]},
-
  {funcionario, ["funcionario"], controller_template, [{template, "funcionario/index_fun.tpl"}]},
  {add_funcionario, ["funcionario", "add"], controller_template, [{template, "funcionario/add_fun.tpl"}]},
- {edit_funcionario, ["funcionario", "edit", id], controller_template, [{template, "funcionario/edit_fun.tpl"}]},
 
+ {edit_funcionario, ["funcionario", "edit", id], controller_template, [{template, "funcionario/edit_fun.tpl"}]},
 
  {horarios,     ["horarios"],               controller_template,  [{ template, "horarios/index.tpl"} ] },
  {horarios_add, ["horarios", "add"] ,       controller_template,  [{ template, "horarios/add.tpl" }]},
-
+ {archives_m,   ["archives", year, month],  controller_template,  [ {template, "archives.tpl"}, {cat, article} ]},
  {setor, ["setor"], controller_template, [{template, "setor/index.tpl"}]},
  {add_setor, ["setor", "add"], controller_template, [{template, "setor/add.tpl"}]},
- {edit_setor, ["setor", "edit", id], controller_template, [{template, "setor/edit.tpl"}]}
+ {edit_setor, ["setor", "edit", id], controller_template, [{template, "setor/edit.tpl"}]},
+ {horarios_edit, ["horarios", "edit", id],   controller_template,  [{ template, "horarios/edit.tpl" }]}
+
 ].

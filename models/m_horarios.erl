@@ -16,6 +16,7 @@
     m_to_list/2,
     m_value/2,
     insert/7,
+    update/8,
     delete/2
 ]).
 
@@ -71,5 +72,16 @@ insert(Descricao,Semana,Horaini,Horafim,Tolerancia,Setor_id, Context) ->
 delete(Id,Context)->
     ?DEBUG(Id),
     z_db:delete("horarios", Id, Context).
+
+update(Id, Descricao, Semana, Horaini, Horafim, Tolerancia, Setor_id, Context) ->
+        Props = [
+            {descricao, Descricao},
+            {dia_semana, Semana},
+            {hora_inicial, Horaini},
+            {hora_final, Horafim},
+            {tolerancia, Tolerancia},
+            {setor_id,Setor_id}
+    ],
+    z_db:update("horarios", Id, Props, Context).
 
 
