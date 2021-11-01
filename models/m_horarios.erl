@@ -26,8 +26,9 @@ m_find_value({get, Args}, #m{value = undefined}, Context) ->
     get(Id, Context);
 
 
-m_find_value({select, _args},#m{value = undefined},Context) ->
-    select(Context);
+m_find_value({select, Args},#m{value = undefined},Context) ->
+    Setor_id = proplists:get_value(setor_id, Args),
+    select(Setor_id,Context);
 
 
 m_find_value(_Key, _Value, _Context) ->
@@ -39,9 +40,9 @@ m_to_list(_Value, _Context) ->
 m_value(_, _Context) ->
     undefined.
 
-select(Context)->
-    Sql = "select * from horarios",
-    Rows = z_db:assoc(Sql,Context),
+select(Setor_Id,Context)->
+    Sql = "select * from horarios where setor_id = $1",
+    Rows = z_db:assoc(Sql,[Setor_Id],Context),
         F = fun(Row) ->
             {H,M,S} = proplists:get_value('hora_inicial',Row),
             {H2,M2,S2} = proplists:get_value('hora_final',Row),

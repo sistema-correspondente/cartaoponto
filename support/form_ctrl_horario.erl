@@ -27,7 +27,7 @@ event(#submit{message = {add_horarios,Args}},Context)->
     HoraFinalFormatada = form_utils:tranform_hour_to_tuple(Horafim),
 
     m_horarios:insert(Descricao,Semana,HoraInicialFormatada,HoraFinalFormatada,Tolerancia,Setor_id,Context),
-    z_render:wire({redirect, [{dispatch, "horarios"}]},
+    z_render:wire({redirect, [{dispatch, "horarios"},{setor_id, Setor_id}]},
         Context);
 
 event(#submit{message = {edit_horarios, Args}}, Context)->
@@ -46,7 +46,7 @@ event(#submit{message = {edit_horarios, Args}}, Context)->
     ?DEBUG(Setor_id),
 
     m_horarios:update(Id, Descricao,Semana,HoraInicialFormatada,HoraFinalFormatada,Tolerancia,Setor_id,Context),
-    z_render:wire({redirect, [{dispatch, "horarios"}]},
+    z_render:wire({redirect, [{dispatch, "horarios"},{setor_id, Setor_id}]},
         Context);
 
 

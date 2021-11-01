@@ -96,4 +96,5 @@ cria_tabela_movimentacao(Context)->
             z_db:q("ALTER TABLE movimentacao ADD CONSTRAINT FK_Horario_M_Id FOREIGN KEY (horario_id) REFERENCES horarios(id)", Context);
         true ->
             ok
-    end.
+    end,
+    z_db:q("ALTER TABLE movimentacao ADD COLUMN  IF NOT EXISTS  funcionario_id INTEGER REFERENCES funcionario(Id)").

@@ -1,8 +1,8 @@
 {% with m.horarios [{get id=id}] as hor %}
 
-    {% print hor %}
+{% print q.setor_id|to_integer %}
     <input type="hidden" id="id" name="id" value="{{ id }}"/>
-    <input type="hidden" id="setor_id" name="setor_id" value="{{ 1 }}"/>
+    <input type="hidden" id="setor_id" name="setor_id" value="{{ q.setor_id|to_integer }}"/>
     <label>Descrição</label>
     <input type="text" class="form-control" id="descricao" name="descricao" value="{{ hor.descricao }}"/>
     <br>

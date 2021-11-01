@@ -14,6 +14,7 @@
                 <th scope="col">SETOR:</th>
                 <th scope="col">EDITAR:</th>
                 <th scope="col">EXCLUIR:</th>
+                <th>Horários</th>
             </tr>
         </thead>
 
@@ -27,6 +28,10 @@
                 <td>
                     {% wire  id="del_setor_"|append:setor.id postback={del_setor id=setor.id} delegate="form_ctrl_setor" %}
                     <button id="del_setor_{{setor.id}}" class="btn btn-danger">Excluir Setor</button>
+                </td>
+                <td>
+                    {% wire  id="go_to"|append:setor.id action={redirect dispatch="horarios" setor_id=setor.id}  %}
+                    <button id="go_to{{setor.id}}" class="btn btn-primary">Horários</button>
                 </td>
             <tr>
 
