@@ -20,6 +20,9 @@
  {setor, ["setor"], controller_template, [{template, "setor/index.tpl"}]},
  {add_setor, ["setor", "add"], controller_template, [{template, "setor/add.tpl"}]},
  {edit_setor, ["setor", "edit", id], controller_template, [{template, "setor/edit.tpl"}]},
- {horarios_edit, ["horarios", "edit", id, setor_id],   controller_template,  [{ template, "horarios/edit.tpl" }]}
+ {horarios_edit, ["horarios", "edit", id, setor_id],   controller_template,  [{ template, "horarios/edit.tpl" }]},
+
+
+ {movimentacao, ["movimentacao"],   controller_template,  [{ template, "movimentacao/index.tpl" }]}
 
 ].
