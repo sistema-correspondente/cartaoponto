@@ -9,7 +9,6 @@
             {% include "setor/_fields.tpl" id=id %}
             <br>
             <button type="submit" class="btn btn-success">Salvar</button>
-
         </form>
 
 </div>

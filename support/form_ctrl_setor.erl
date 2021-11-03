@@ -10,13 +10,16 @@
 -author("abensoft").
 
 -include_lib("zotonic.hrl").
--export([event/2]).
+-export([event/2, fields/1]).
 
+fields(Args1) ->
+    Descricao = proplists:get_value("descricao", Args1),
+    Descricao.
 
 
 event(#submit{message = {add_setor, Args}}, Context) ->
     Args1 = lists:merge(Args, z_context:get_q_all(Context)),
-    Descricao = proplists:get_value("descricao", Args1),
+    Descricao = form_ctrl_setor:fields(Args1),
 
     m_setor:insert(Descricao, Context),
     z_render:wire({redirect, [{dispatch, "setor"}]}, Context);
@@ -26,9 +29,9 @@ event(#submit{message = {add_setor, Args}}, Context) ->
 
 event(#submit{message = {edit_setor, Args}}, Context) ->
     Args1 = lists:merge(Args, z_context:get_q_all(Context)),
-
+    Descricao = form_ctrl_setor:fields(Args1),
     Id = z_utils:depickle(proplists:get_value("id", Args1), Context),
-    Descricao = proplists:get_value("descricao", Args1),
+
 
     m_setor:update(Id, Descricao, Context),
     z_render:wire({redirect, [{dispatch, "setor"}]}, Context);

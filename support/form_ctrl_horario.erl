@@ -42,7 +42,7 @@ event(#submit{message = {edit_horarios, Args}}, Context)->
     ?DEBUG(Id),
     ?DEBUG(Setor_id),
 
-    m_horarios:update(Id, Descricao,Semana,HoraInicialFormatada,HoraFinalFormatada,Tolerancia,Setor_id,Context),
+    m_horarios:update(Id, Descricao, Semana, HoraInicialFormatada, HoraFinalFormatada, Tolerancia, Setor_id, Context),
     z_render:wire({redirect, [{dispatch, "horarios"},{setor_id, Setor_id}]},
         Context);
 
