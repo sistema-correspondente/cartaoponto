@@ -30,6 +30,7 @@ event(#submit{message ={add_funcionario, Args}}, Context) ->
     ?DEBUG(z_context:get_q_all(Context)),
     Args1 = lists:merge(Args, z_context:get_q_all(Context)),
     {Cpf, Nome, Ativo1, Setor}=form_ctrl_fun:fields(Args1),
+
     {ok, CatId} = m_category:name_to_id(person, Context),
     {ok, RscId} = m_rsc:insert([{title, Nome}, {category_id, CatId }], Context),
     m_funcionario:insert(Cpf, Nome, Ativo1, Setor, RscId, Context),
