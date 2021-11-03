@@ -18,9 +18,19 @@
     insert/7,
     get/2,
     update/8,
-    delete/2
+    delete/2,
+    fields/6
 ]).
 
+fields(Descricao,Semana,Horaini,Horafim,Tolerancia,Setor_id) ->
+     [
+        {descricao, Descricao},
+        {dia_semana, Semana},
+        {hora_inicial, Horaini},
+        {hora_final, Horafim},
+        {tolerancia, Tolerancia},
+        {setor_id,Setor_id}
+    ].
 m_find_value({get, Args}, #m{value = undefined}, Context) ->
     Id = proplists:get_value(id, Args),
     get(Id, Context);
@@ -57,11 +67,11 @@ select(Setor_Id,Context)->
 get(Id, Context) ->
     Sql = "select * from horarios where id = $1",
     case z_db:assoc(Sql, [Id], Context) of
-        [R] -> corrige_valores(R, Context);
+        [R] -> corrige_valores(R);
         _ -> []
     end.
 
-corrige_valores(Value, Context) ->
+corrige_valores(Value) ->
         HoraInicial = proplists:get_value(hora_inicial,Value),
         HoraFinal = proplists:get_value(hora_final,Value),
         Rows1 = form_utils:delete_multiple_keys(['hora_inicial','hora_final'],Value),
@@ -70,15 +80,7 @@ corrige_valores(Value, Context) ->
 
 
 insert(Descricao,Semana,Horaini,Horafim,Tolerancia,Setor_id, Context) ->
-
-    Props = [
-        {descricao, Descricao},
-        {dia_semana, Semana},
-        {hora_inicial, Horaini},
-        {hora_final, Horafim},
-        {tolerancia, Tolerancia},
-        {setor_id,Setor_id}
-    ],
+    Props =m_horarios:fields(Descricao,Semana,Horaini,Horafim,Tolerancia,Setor_id),
     z_db:insert("horarios", Props, Context).
 
 delete(Id,Context)->
@@ -86,14 +88,7 @@ delete(Id,Context)->
     z_db:delete("horarios", Id, Context).
 
 update(Id, Descricao, Semana, Horaini, Horafim, Tolerancia, Setor_id, Context) ->
-    Props = [
-        {descricao, Descricao},
-        {dia_semana, Semana},
-        {hora_inicial, Horaini},
-        {hora_final, Horafim},
-        {tolerancia, Tolerancia},
-        {setor_id,Setor_id}
-    ],
+    Props =m_horarios:fields(Descricao,Semana,Horaini,Horafim,Tolerancia,Setor_id),
     z_db:update("horarios", Id, Props, Context).
 
 
