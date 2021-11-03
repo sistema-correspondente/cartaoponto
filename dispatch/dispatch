@@ -9,8 +9,8 @@
 
  {archives_y,   ["archives", year],         controller_template,  [ {template, "archives.tpl"}, {cat, article} ]},
  {archives_m,   ["archives", year, month],  controller_template,  [ {template, "archives.tpl"}, {cat, article} ]},
- {funcionario,  ["funcionario"], controller_template, [{template, "funcionario/index_fun.tpl"}]},
- {add_funcionario, ["funcionario", "add"], controller_template, [{template, "funcionario/add_fun.tpl"}]},
+ {funcionario,  ["funcionario"], controller_template,             [ {template, "funcionario/index_fun.tpl"}]},
+ {add_funcionario, ["funcionario", "add"],  controller_template,  [ {template, "funcionario/add_fun.tpl"}]},
 
  {edit_funcionario, ["funcionario", "edit", id], controller_template, [{template, "funcionario/edit_fun.tpl"}]},
 
