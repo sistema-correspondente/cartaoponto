@@ -4,7 +4,7 @@
     <input type="hidden" id="rsc_id" name="rsc_id" value="{{ funcionario.rsc_id|pickle }}"/>
 <label for="cpf">CPF:</label>
 <input type="text" id="cpf" name="cpf" class="form-control" value="{{ funcionario.cpf }}" placeholder="000.000.000-00"/>
-{#{% validate id="cpf" type={presence failure_message="Campo Obrigatório."} message_after="cpf" %}#}
+{% validate id="cpf" type={presence failure_message="Campo Obrigatório."} message_after="cpf" %}
     {% validate id="cpf" type={postback event ="valida_cpf"} %}
 <label for="nome">Nome:</label>
 <input type="text" id="nome" name="nome" class="form-control" value="{{ funcionario.nome }}"/>
