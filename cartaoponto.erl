@@ -20,7 +20,8 @@
 -mod_title("teste zotonic site").
 -mod_description("A simple weblog, used as an example of how to create a Zotonic site.").
 -mod_prio(10).
--export([manage_schema/2]).
+-export([manage_schema/2,
+         observe_valida_cpf/2]).
 
 -mod_schema(1).
 -include_lib("zotonic.hrl").
@@ -98,3 +99,20 @@ cria_tabela_movimentacao(Context)->
             ok
     end,
     z_db:q("ALTER TABLE movimentacao ADD COLUMN  IF NOT EXISTS  funcionario_id INTEGER REFERENCES funcionario(Id)").
+
+
+
+%% The event name passed in your template as event="validate_cpf",
+%% prefixed with observe_
+observe_valida_cpf({valida_cpf, {postback, Id, Value, Args}}, Context) ->
+    ?DEBUG(Value),
+    ?DEBUG(Args),
+    ?DEBUG(Id),
+    ?DEBUG(Context),
+    case form_utils:valida_cpf(Value) of
+        true ->
+            {{ok, Value}, Context};
+        false ->
+            %% The validation message will be shown in the form
+            {{error, Id, "invalido."}, Context}
+    end.

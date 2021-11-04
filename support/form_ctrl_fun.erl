@@ -11,7 +11,8 @@
 -include_lib("zotonic.hrl").
 %% API
 -export([event/2,
-        fields/1]).
+        fields/1,
+    observe_validate_cpf/2]).
 
 fields(Args1)->
     Cpf = proplists:get_value("cpf", Args1),
@@ -55,9 +56,23 @@ event(#postback{message={del_funcionario, Args}}, Context ) ->
     m_funcionario:delete(Id, Context),
     z_render:wire({reload, []}, Context);
 
-
 event(X, Context) ->
     ?DEBUG(X),
     ?DEBUG(Context),
     Context.
 
+
+%% The event name passed in your template as event="validate_cpf",
+%% prefixed with observe_
+observe_validate_cpf({valida_cpf, {postback, Id, Value, Args}}, Context) ->
+    ?DEBUG(Value),
+    ?DEBUG(Args),
+    ?DEBUG(Id),
+    ?DEBUG(Context),
+    case form_utils:valida_cpf(Value) of
+        true ->
+            {{ok, Value}, Context};
+        false ->
+            %% The validation message will be shown in the form
+            {{error, Id, "invalido."}, Context}
+    end.
