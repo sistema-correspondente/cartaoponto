@@ -28,6 +28,7 @@
 	</head>
 	<body class="{% block page_class %}page{% endblock %}">
 
+
 		<div class="navbar navbar-inverse navbar-fixed-top">
 
 			<div class="container">
