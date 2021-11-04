@@ -76,7 +76,7 @@ corrige_valores(Value) ->
         HoraFinal = proplists:get_value(hora_final,Value),
         Rows1 = form_utils:delete_multiple_keys(['hora_inicial','hora_final'],Value),
         [{hora_inicial_srt, z_dateformat:format({{0,0,0}, HoraInicial},    "H:i", en)},
-         {hora_final_srt,   z_dateformat:format({{0,0,0}, HoraFinal}, "H:i", en)} | Rows1].
+         {hora_final_srt,   z_dateformat:format({{0,0,0}, HoraFinal},      "H:i", en)} | Rows1].
 
 
 insert(Descricao,Semana,Horaini,Horafim,Tolerancia,Setor_id, Context) ->

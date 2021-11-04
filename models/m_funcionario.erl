@@ -27,8 +27,6 @@
 ]).
 
 
-
-
 m_find_value({get, Args}, #m{value = undefined}, Context) ->
     Id = proplists:get_value(id, Args),
     get(Id, Context);

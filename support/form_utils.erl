@@ -13,7 +13,9 @@
 -export([tranform_hour_to_tuple/1,
         delete_multiple_keys/2,
         valida_cpf/1,
-        to_integer/1]).
+        to_integer/1,
+        get_start_and_end_day/0
+    ]).
 
 tranform_hour_to_tuple(Time)->
     Res = string:split(Time,":"),
@@ -44,6 +46,12 @@ valida_cpf(S) ->
     D =:= lists:nth(10, C) - 48 andalso
         ( lists:sum(lists:zipwith(fun(X,Y) -> (X-48)*Y end, C, [0,1,2,3,4,5,6,7,8,0,0]) ) + D * 9 ) rem 11 =:= lists:nth(11, C) - 48.
 
+get_start_and_end_day()->
+    Day = erlang:localtime(),
+    {D,H} = Day,
+    Start_day = {D,{0,0,0}},
+    End_day = {D,{23,59,59}},
+    {Start_day,End_day}.
 
 %% Internal functions
 %% ====================================================================

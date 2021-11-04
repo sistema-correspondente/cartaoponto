@@ -13,14 +13,11 @@
 -include_lib("zotonic.hrl").
 -export([event/2]).
 
-
-
-event(#postback{message = {insert_morning_first, _Args}}, Context) ->
-    m_movimentacao:insert_morning_first(Context),
+event(#postback{message = {insert, Args}}, Context) ->
+    Args1 = lists:merge(Args,z_context:get_q_all(Context)),
+    Id = proplists:get_value(id, Args1),
+    m_movimentacao:insert(Id,Context),
     z_render:wire({reload, []}, Context);
-
-
-
 
 event(X,Context)->
     io:format('chegou',[]),
@@ -28,4 +25,3 @@ event(X,Context)->
     ?DEBUG(X),
     ?DEBUG(Context),
     Context.
-

@@ -87,14 +87,15 @@ cria_tabela_movimentacao(Context)->
             z_db:create_table(movimentacao, [
                 #column_def{name=id,type="serial",is_nullable=false},
                 #column_def{name=hora_batida_inicio,type="timestamptz",is_nullable=false},
-                #column_def{name=hora_batida_final,type="timestamptz",is_nullable=false},
+                #column_def{name=hora_batida_final,type="timestamptz",is_nullable=true},
                 #column_def{name=hora_descontada,type="timestamptz",is_nullable=true},
                 #column_def{name=hora_extra,type="timestamptz",is_nullable=true},
                 #column_def{name=funcionario_id,type="integer",is_nullable=false}
                 #column_def{name=horario_id,type="integer",is_nullable=false}
             ],Context),
             z_db:q("ALTER TABLE movimentacao ADD CONSTRAINT FK_Funcionario_M_Id FOREIGN KEY (funcionario_id) REFERENCES funcionario(id)", Context),
-            z_db:q("ALTER TABLE movimentacao ADD CONSTRAINT FK_Horario_M_Id FOREIGN KEY (horario_id) REFERENCES horarios(id)", Context);
+            z_db:q("ALTER TABLE movimentacao ADD CONSTRAINT FK_Horario_M_Id FOREIGN KEY (horario_id) REFERENCES horarios(id)", Context),
+            z_db:q("ALTER TABLE movimentacao ALTER COLUMN hora_batida_final  drop not NULL",Context);
         true ->
             ok
     end,
