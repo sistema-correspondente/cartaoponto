@@ -22,8 +22,8 @@
                 {% for mov in m.movimentacao[{select id=1}] %}
                 <tr>
                     <th>{{ mov.nome|upper }}</th>
-                    <th>{{ mov.start_day  }}</th>
-                    <th>{{ mov.end_day    }}</th>
+                    <th>{{ mov.hora_batida_inicio | date:"h:i"  }}</th>
+                    <th>{{ mov.hora_batida_final | date:"h:i" }}</th>
                 </tr>
                 {% endfor %}
             </table>

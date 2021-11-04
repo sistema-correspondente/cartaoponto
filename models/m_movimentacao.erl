@@ -43,20 +43,19 @@ m_value(_, _Context) ->
 select(Id, Context) ->
     {Start_day,End_day} = form_utils:get_start_and_end_day(),
     Sql="select * from movimentacao join  funcionario f on f.id = $1
-    where hora_batida_inicio BETWEEN $2 AND $3",
-    Rows = z_db:assoc(Sql,[Id,Start_day,End_day],Context),
-    F = fun(Row) ->
-        Start = proplists:get_value(hora_batida_inicio,Row),
-        {D,H} = Start,
-        Finish = proplists:get_value(hora_batida_final,Row),
-        {D1,H1} = Finish,
-        ?DEBUG(Start),
-        Rows1 = form_utils:delete_multiple_keys([hora_batida_inicio,hora_batida_final],Row),
-
-        [{   start_day, z_dateformat:format({{0,0,0}, H },    "H:i", en},
-            {end_day,   z_dateformat:format({{0,0,0}, H1},    "H:i", en)} | Rows1]
-        end,
-    lists:map(F, Rows).
+    where hora_batida_inicio BETWEEN $2 AND $3 ",
+    Rows = z_db:assoc(Sql,[Id,Start_day,End_day],Context).
+%%    ?DEBUG(Rows),
+%%    F = fun(Row) ->
+%%        Start = proplists:get_value(hora_batida_inicio,Row),
+%%        {_,H} = Start,
+%%        Finish = proplists:get_value(hora_batida_final,Row),
+%%        {_,H1} = Finish,
+%%        Rows1 = form_utils:delete_multiple_keys([hora_batida_inicio,hora_batida_final],Row),
+%%        [{   start_day, z_dateformat:format({{0,0,0}, H },    "H:i", en)},
+%%            {end_day,   z_dateformat:format({{0,0,0}, H1},    "H:i", en)} | Rows1]
+%%        end,
+%%    lists:map(F, Rows).
 
 get_is_null(Id,Context)->
     {Start_day,End_day} = form_utils:get_start_and_end_day(),
