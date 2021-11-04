@@ -330,11 +330,12 @@ header {
    ---------------------------------------------------------- */
 
 #navigation li a, .navbar a.brand {
+    background-color: black;
     text-shadow: none;
 }
 
 .navbar .nav>li>a:hover {
-    color: #ddd;
+    color: #3d3939;
 }
 
 /* Images

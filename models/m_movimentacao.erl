@@ -107,6 +107,6 @@ insert(Id,Context)->
     Id_update = proplists:get_value(id,Nullo),
     ?DEBUG(Id_update),
     case Id_update == undefined of
-    true -> insert_movimentacao(Id,2,Context);
+    true -> insert_movimentacao(Id,5,Context);
     false -> update_movimentacao(Id_update,Context)
 end.

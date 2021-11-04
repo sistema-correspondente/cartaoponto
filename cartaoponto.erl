@@ -31,7 +31,37 @@ manage_schema(install, Context)->
     cria_tabela_horarios(Context),
     cria_tabela_funcionario(Context),
     cria_tabela_movimentacao(Context),
-    #datamodel{}.
+    #datamodel{
+        resources = [
+            {
+                menu_funcionario,
+                menu,
+                [{title, <<"Funcionários"/utf8>>}, {page_path, <<"/funcionario">>}]
+            },
+            {
+                menu_setor,
+                menu,
+                [{title, <<"Setor"/utf8>>}, {page_path, <<"/setor">>}]
+            },
+            {
+                menu_movimentacao,
+                menu,
+                [{title, <<"Movimentação"/utf8>>}, {page_path, <<"/movimentacao">>}]
+            },
+
+            {menu_cadastros,
+                menu,
+                [{title, <<"Cadastros">>},
+                    {menu, [{menu_funcionario, []}]}, {menu, [{menu_setor, []}]}, {menu, [{menu_movimentacao, []}]}
+                ]
+            },
+            {main_menu, menu, [{menu, [{menu_cadastros, []}]}]}
+
+        ]
+
+
+
+}.
 
 
 cria_tabela_setor(Context)->
@@ -78,7 +108,7 @@ cria_tabela_funcionario(Context)->
         true ->
             ok
     end,
-    z_db:q("ALTER TABLE funcionario ADD COLUMN  IF NOT EXISTS  rsc_id INTEGER REFERENCES rsc(Id)").
+    z_db:q("ALTER TABLE funcionario ADD COLUMN  IF NOT EXISTS  rsc_id INTEGER REFERENCES rsc(Id)", Context).
 
 
 cria_tabela_movimentacao(Context)->
@@ -99,7 +129,7 @@ cria_tabela_movimentacao(Context)->
         true ->
             ok
     end,
-    z_db:q("ALTER TABLE movimentacao ADD COLUMN  IF NOT EXISTS  funcionario_id INTEGER REFERENCES funcionario(Id)").
+    z_db:q("ALTER TABLE movimentacao ADD COLUMN  IF NOT EXISTS  funcionario_id INTEGER REFERENCES funcionario(Id)", Context).
 
 
 

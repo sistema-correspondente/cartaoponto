@@ -52,9 +52,7 @@ get_start_and_end_day()->
     Start_day = {D,{0,0,0}},
     End_day = {D,{23,59,59}},
     {Start_day,End_day}.
-
-%% Internal functions
-%% ====================================================================
+%% ===================================================================
 normalizar(S) when length(S) < 11 -> normalizar("0" ++ S);
 normalizar(S) when length(S) =:= 11 -> S;
 normalizar(S) when length(S) > 11 -> lists:sublist(S, 11).
